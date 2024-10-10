@@ -56,7 +56,11 @@ def getIP():
     return s.getsockname()[0]
 
 def getVersion():
-    try: return os.popen("lsb_release -d").read().split(":")[-1].strip()
+    try: return os.popen("lsb_release -d").read().strip()
+    except: return ""
+    
+def getCodename():
+    try: return os.popen("lsb_release -sc").read().strip()
     except: return ""
 
 def printc(rText, rColour=col.BRIGHT_GREEN, rPadding=0, rLimit=46):
@@ -111,6 +115,8 @@ def prepare(rType="MAIN"):
         subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/universe/libz/libzip/libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && rm -rf libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1", shell=True)
     printc("Installing pip modules")
     os.system("pip3 install ndg-httpsclient > /dev/null 2>&1 && pip3 install pyopenssl > /dev/null 2>&1 && pip3 install pyasn1 > /dev/null 2>&1")
+    printc("Installing paramiko modules")
+    os.system("sudo python3 -m pip install paramiko > /dev/null")
     os.system("apt-get install -f -y > /dev/null") # Clean up above
     os.system("systemctl start mariadb > /dev/null")
     try:
