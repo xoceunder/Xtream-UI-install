@@ -95,9 +95,10 @@ def prepare(rType="MAIN"):
     os.system("apt-get update > /dev/null 2>&1")
     os.system("apt-get -y full-upgrade > /dev/null 2>&1")
     if rType == "MAIN":
-        printc("Install MariaDB 11.5 repository")
+        printc("Install MariaDB 10.6 repository")
         os.system("sudo apt-get -yq install software-properties-common > /dev/null 2>&1")
-        os.system("curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version='mariadb-11.5' > /dev/null 2>&1")
+        os.system("sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 > /dev/null 2>&1")
+        os.system("sudo add-apt-repository -y 'deb [arch=amd64,arm64,ppc64el] http://ams2.mirrors.digitalocean.com/mariadb/repo/10.6/ubuntu %s main' > /dev/null 2>&1" % getCodename())
         os.system("apt-get update > /dev/null 2>&1")
     for rPackage in rRemove:
         if is_installed(rPackage):
