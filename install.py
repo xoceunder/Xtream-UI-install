@@ -116,7 +116,7 @@ def prepare(rType="MAIN"):
     printc("Installing pip modules")
     os.system("pip3 install ndg-httpsclient > /dev/null 2>&1 && pip3 install pyopenssl > /dev/null 2>&1 && pip3 install pyasn1 > /dev/null 2>&1")
     printc("Installing paramiko modules")
-    os.system("sudo python3 -m pip install paramiko > /dev/null")
+    os.system("sudo python3 -m pip install paramiko > /dev/null 2>&1")
     os.system("apt-get install -f -y > /dev/null") # Clean up above
     os.system("systemctl start mariadb > /dev/null")
     try:
