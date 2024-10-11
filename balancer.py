@@ -38,6 +38,10 @@ def prepare():
     for rPackage in rPackages:
         if not is_installed(rPackage):
             subprocess.run(f"sudo DEBIAN_FRONTEND=noninteractive apt-get install {rPackage} -yq > /dev/null 2>&1", shell=True)
+    if not is_installed("libssl1.1"):
+        subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && rm -rf libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1", shell=True)
+    if not is_installed("libzip5"):
+        subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/universe/libz/libzip/libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && rm -rf libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1", shell=True)
     os.system("apt-get install -y > /dev/null") # Clean up above
     os.system("adduser --system --shell /bin/false --group --disabled-login xtreamcodes > /dev/null")
     if not os.path.exists("/home/xtreamcodes"): os.mkdir("/home/xtreamcodes")
@@ -67,17 +71,14 @@ def configure():
         rFile = open("/etc/fstab", "a")
         rFile.write("tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0\ntmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0")
         rFile.close()
-    if not "xtreamcodes" in open("/etc/sudoers").read(): os.system('echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables" >> /etc/sudoers')
+    if not "xtreamcodes" in open("/etc/sudoers").read(): os.system('echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python3, /usr/bin/python" >> /etc/sudoers')
     if not os.path.exists("/etc/init.d/xtreamcodes"):
         rFile = open("/etc/init.d/xtreamcodes", "w")
         rFile.write("#! /bin/bash\n/home/xtreamcodes/iptv_xtream_codes/start_services.sh")
         rFile.close()
         os.system("chmod +x /etc/init.d/xtreamcodes > /dev/null")
-    try:
-        os.system("sudo modprobe ip_conntrack")
-    except:
-        pass
-    rFile = io.open("/etc/sysctl.conf", "w", encoding="utf-8")
+    os.system("sudo modprobe ip_conntrack")
+    rFile = open("/etc/sysctl.conf", "w", encoding="utf-8")
     rFile.write(rSysCtl)
     rFile.close()
     os.system("sudo sysctl -p >/dev/null 2>&1")
