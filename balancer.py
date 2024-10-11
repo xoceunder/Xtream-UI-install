@@ -37,7 +37,6 @@ def prepare():
     os.system("apt-get -y full-upgrade > /dev/null 2>&1")
     for rPackage in rPackages:
         if not is_installed(rPackage):
-            printc("Installing %s" % rPackage)
             subprocess.run(f"sudo DEBIAN_FRONTEND=noninteractive apt-get install {rPackage} -yq > /dev/null 2>&1", shell=True)
     os.system("apt-get install -y > /dev/null") # Clean up above
     os.system("adduser --system --shell /bin/false --group --disabled-login xtreamcodes > /dev/null")
