@@ -97,8 +97,8 @@ def prepare(rType="MAIN"):
     if rType == "MAIN":
         os.system("sudo apt-get -yq install software-properties-common > /dev/null 2>&1")
         printc("Adding repo: Ubuntu %s" % getCodename())
-        os.system("sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 > /dev/null 2>&1")
-        os.system("sudo add-apt-repository -y 'deb [arch=amd64,arm64,ppc64el] http://ams2.mirrors.digitalocean.com/mariadb/repo/11.5/ubuntu %s main' > /dev/null 2>&1" % getCodename())
+        os.system("sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' > /dev/null 2>&1")
+        os.system("sudo add-apt-repository -y 'deb [arch=amd64,arm64,ppc64el] http://mirror.23media.com/mariadb/repo/11.5/ubuntu %s main' > /dev/null 2>&1" % getCodename())
         os.system("apt-get update > /dev/null 2>&1")
     for rPackage in rRemove:
         if is_installed(rPackage):
