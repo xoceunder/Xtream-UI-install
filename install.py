@@ -243,7 +243,7 @@ def decrypt():
 def configure():
     printc("Configuring System")
     if not "/home/xtreamcodes/iptv_xtream_codes/" in open("/etc/fstab").read():
-        rFile = io.open("/etc/fstab", "a", encoding="utf-8")
+        rFile = open("/etc/fstab", "a", encoding="utf-8")
         rFile.write("tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0\ntmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0")
         rFile.close()
     if not "xtreamcodes" in open("/etc/sudoers").read():
@@ -262,7 +262,7 @@ def configure():
         except:
             pass
         try:
-            rFile = io.open("/etc/sysctl.conf", "w", encoding="utf-8")
+            rFile = open("/etc/sysctl.conf", "w", encoding="utf-8")
             rFile.write(rSysCtl)
             rFile.close()
             os.system("sudo sysctl -p >/dev/null 2>&1")
@@ -357,7 +357,7 @@ if __name__ == "__main__":
                     printc("Admin UI default login is admin/admin", col.BRIGHT_YELLOW)
                     printc("Your mysql credentials have been saved to:")
                     printc("Save Credentials is file to %s/credentials.txt" % rPath, col.BRIGHT_YELLOW)
-                    rFile = io.open(rPath + "/credentials.txt", "w")
+                    rFile = open(rPath + "/credentials.txt", "w")
                     rFile.write("MySQL Username: %s\nMySQL Password: %s" % (rUsername, rPassword))
                     rFile.write("Admin UI Wan IP: http://%s:25500\n" % getIP())
                     rFile.write("Admin UI default login is admin/admin\n")
