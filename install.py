@@ -115,7 +115,7 @@ def prepare(rType="MAIN"):
         printc("Installing libzip5")
         subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/universe/libz/libzip/libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && rm -rf libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1", shell=True)
     printc("Installing pip3")
-    os.system("add-apt-repository universe > /dev/null 2>&1 && curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py > /dev/null 2>&1 && python3 get-pip.py > /dev/null 2>&1")
+    os.system("add-apt-repository universe -y > /dev/null 2>&1 && curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py > /dev/null 2>&1 && python3 get-pip.py > /dev/null 2>&1")
     printc("Installing pip modules")
     os.system("pip3 install ndg-httpsclient > /dev/null 2>&1 && pip3 install pyopenssl > /dev/null 2>&1 && pip3 install pyasn1 > /dev/null 2>&1")
     #printc("Installing paramiko modules")
