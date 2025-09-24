@@ -50,8 +50,8 @@ stop() {
   # Detener php-fpm usando los pidfile conocidos
   for pidfile in $SCRIPT/php/*.pid; do
     if [ -f "$pidfile" ]; then
-      kill $(cat "$pidfile") 2>/dev/null
-      rm -f "$pidfile"
+      sudo kill $(cat "$pidfile") 2>/dev/null
+      sudo rm -f "$pidfile"
     fi
   done
 
@@ -70,8 +70,8 @@ reload() {
     return 1
   fi
   log "Reloading XtreamCodes..."
-  sudo -u xtreamcodes "$SCRIPT/nginx/sbin/nginx" -s reload
-  sudo -u xtreamcodes "$SCRIPT/nginx_rtmp/sbin/nginx_rtmp" -s reload
+  "$SCRIPT/nginx/sbin/nginx" -s reload
+  "$SCRIPT/nginx_rtmp/sbin/nginx_rtmp" -s reload
 }
 
 case "$1" in
