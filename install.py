@@ -251,8 +251,8 @@ def configure():
         ) as f:
             f.write(rSystemd)
         os.system("sudo chmod +x /etc/systemd/system/xtreamcodes.service")
-        os.system("sudo systemctl daemon-reload")
-        os.system("sudo systemctl enable xtreamcodes")
+        os.system("sudo systemctl daemon-reload > /dev/null")
+        os.system("sudo systemctl enable xtreamcodes > /dev/null")
 
     printc("Custom sysctl.conf - If you have your own custom sysctl.conf, type N or it will be overwritten. If you don't know what a sysctl configuration is, type Y as it will correctly set your TCP settings and open file limits.", col.BRIGHT_YELLOW)
     print(" ")
