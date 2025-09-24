@@ -1,0 +1,95 @@
+#!/bin/sh
+
+SCRIPT=/home/xtreamcodes/iptv_xtream_codes
+USER=$(whoami)
+
+if [ $USER != "root" ]; then
+  echo "Please run as root!"
+  exit 0
+fi
+
+log() {
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - $1"
+}
+
+start() {
+  pids=$(pgrep -u xtreamcodes nginx | wc -l)
+  if [ "$pids" -ne 0 ]; then
+    log "XtreamCodes is already running"
+    return 1
+  fi
+
+  log "Starting XtreamCodes..."
+ 
+  sudo rm -f $SCRIPT/php/*.pid
+  sudo -u xtreamcodes $SCRIPT/php/bin/php $SCRIPT/crons/setup_cache.php
+  sudo -u xtreamcodes $SCRIPT/php/bin/php $SCRIPT/tools/signal_receiver.php >/dev/null 2>/dev/null &
+  sudo -u xtreamcodes $SCRIPT/php/bin/php $SCRIPT/tools/pipe_reader.php >/dev/null 2>/dev/null &
+  sudo chown -R xtreamcodes:xtreamcodes /sys/class/net
+  sudo chown -R xtreamcodes:xtreamcodes /home/xtreamcodes 2>/dev/null
+  $SCRIPT/nginx/sbin/nginx >/dev/null 2>/dev/null
+  $SCRIPT/nginx_rtmp/sbin/nginx_rtmp >/dev/null 2>/dev/null
+  /sbin/start-stop-daemon --start --quiet --pidfile $SCRIPT/php/VaiIb8.pid --exec $SCRIPT/php/sbin/php-fpm -- --daemonize --fpm-config $SCRIPT/php/etc/VaiIb8.conf
+  /sbin/start-stop-daemon --start --quiet --pidfile $SCRIPT/php/JdlJXm.pid --exec $SCRIPT/php/sbin/php-fpm -- --daemonize --fpm-config $SCRIPT/php/etc/JdlJXm.conf
+  /sbin/start-stop-daemon --start --quiet --pidfile $SCRIPT/php/CWcfSP.pid --exec $SCRIPT/php/sbin/php-fpm -- --daemonize --fpm-config $SCRIPT/php/etc/CWcfSP.conf
+  
+}
+
+stop() {
+  pids=$(pgrep -u xtreamcodes nginx | wc -l)
+  if [ "$pids" -eq 0 ]; then
+    log 'XtreamCodes is not running'
+    return 1
+  fi
+  log 'Stopping XtreamCodes...'
+  
+  # Detener nginx y nginx_rtmp
+  $SCRIPT/nginx/sbin/nginx -s stop >/dev/null 2>&1
+  $SCRIPT/nginx_rtmp/sbin/nginx_rtmp -s stop >/dev/null 2>&1
+
+  # Detener php-fpm usando los pidfile conocidos
+  for pidfile in $SCRIPT/php/*.pid; do
+    if [ -f "$pidfile" ]; then
+      kill $(cat "$pidfile") 2>/dev/null
+      rm -f "$pidfile"
+    fi
+  done
+
+}
+
+restart() {
+  stop
+  sleep 2
+  start
+}
+
+reload() {
+  pids=$(pgrep -u xtreamcodes nginx | wc -l)
+  if [ "$pids" -eq 0 ]; then
+    log 'XtreamCodes is not running'
+    return 1
+  fi
+  log "Reloading XtreamCodes..."
+  sudo -u xtreamcodes "$SCRIPT/nginx/sbin/nginx" -s reload
+  sudo -u xtreamcodes "$SCRIPT/nginx_rtmp/sbin/nginx_rtmp" -s reload
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  reload)
+    reload
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|reload}"
+    ;;
+esac
+
+exit 0
