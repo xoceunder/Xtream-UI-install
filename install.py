@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import subprocess, os, random, string, sys, shutil, socket, zipfile, urllib.request, urllib.error, urllib.parse, json, base64, io, time
+import subprocess, os, random, string, sys, shutil, socket, zipfile, json, base64, io, time
 from itertools import cycle
 from zipfile import ZipFile
-from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
+from urllib.request import urlopen
 
 rDownloadURL = {"main": "https://bitbucket.org/xoceunder/x-ui/raw/master/main_xui_xoceunder.zip", "sub": "https://bitbucket.org/xoceunder/x-ui/raw/master/sub_xui_xoceunder.zip"}
-rPackages = ["cpufrequtils", "iproute2", "python", "python-is-python3", "python3-pip", "net-tools", "dirmngr", "gpg-agent", "software-properties-common", "libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fsprogs", "wget", "sysstat", "alsa-utils", "v4l-utils", "mcrypt", "nscd", "htop", "iptables-persistent", "libjpeg-dev", "libpng-dev", "php-ssh2", "xz-utils", "zip", "unzip", "mc", "libpng16-16", "libzip5", "mariadb-server", "rsync", "libmaxminddb0", "libmaxminddb-dev"]
+rPackages = ["cpufrequtils", "iproute2", "python", "net-tools", "dirmngr", "gpg-agent", "software-properties-common", "libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fsprogs", "wget", "sysstat", "alsa-utils", "v4l-utils", "mcrypt", "nscd", "htop", "iptables-persistent", "libjpeg-dev", "libpng-dev", "php-ssh2", "xz-utils", "zip", "unzip", "mc", "libpng16-16", "libzip5", "mariadb-server", "rsync", "libmaxminddb0", "libmaxminddb-dev"]
 rRemove = ["mysql-server"]
 rInstall = {"MAIN": "main", "LB": "sub"}
 rUpdate = {"UPDATE": "update"}
@@ -108,18 +107,6 @@ def prepare(rType="MAIN"):
         if not is_installed(rPackage):
             printc("Installing %s" % rPackage)
             subprocess.run(f"sudo DEBIAN_FRONTEND=noninteractive apt-get install {rPackage} -yq > /dev/null 2>&1", shell=True)
-    if not is_installed("libssl1.1"):
-        printc("Installing libssl1.1")
-        subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && rm -rf libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1", shell=True)
-    if not is_installed("libzip5"):
-        printc("Installing libzip5")
-        subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/universe/libz/libzip/libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1 && rm -rf libzip5_1.5.1-0ubuntu1_amd64.deb > /dev/null 2>&1", shell=True)
-    printc("Installing pip3")
-    os.system("add-apt-repository universe -y > /dev/null 2>&1 && curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py > /dev/null 2>&1 && python3 get-pip.py > /dev/null 2>&1")
-    printc("Installing pip modules")
-    os.system("pip3 install ndg-httpsclient > /dev/null 2>&1 && pip3 install pyopenssl > /dev/null 2>&1 && pip3 install pyasn1 > /dev/null 2>&1")
-    printc("Installing paramiko modules")
-    os.system("sudo python3 -m pip install paramiko > /dev/null 2>&1")
     os.system("apt-get install -f -y > /dev/null") # Clean up above
     os.system("systemctl start mariadb > /dev/null")
     try:
@@ -320,6 +307,12 @@ if __name__ == "__main__":
     if not rVersion in rVersions:
         printc("Unsupported Operating System, Ubuntu %s" % rVersion, col.GREEN, 2)
         sys.exit(1)
+    if rVersion == "20.04":
+        rPackages.append("libzip5")
+    elif rVersion == "18.04":
+        rPackages.append("libzip4")
+    else:
+        rPackages.append("libzip5")
     printc("XtreamUI 22f Ubuntu %s - Moded XoceUnder" % rVersion, col.GREEN, 2)
     print(" ")
     rType = input("  Installation Type [MAIN, LB, UPDATE]: ")
