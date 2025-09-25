@@ -12,7 +12,41 @@ rInstall = {"MAIN": "main", "LB": "sub"}
 rUpdate = {"UPDATE": "update"}
 rMySQLCnf = base64.b64decode("IyBYdHJlYW0gQ29kZXMKCltjbGllbnRdCnBvcnQgICAgICAgICAgICA9IDMzMDYKCltteXNxbGRfc2FmZV0KbmljZSAgICAgICAgICAgID0gMAoKW215c3FsZF0KdXNlciAgICAgICAgICAgID0gbXlzcWwKcG9ydCAgICAgICAgICAgID0gNzk5OQpiYXNlZGlyICAgICAgICAgPSAvdXNyCmRhdGFkaXIgICAgICAgICA9IC92YXIvbGliL215c3FsCnRtcGRpciAgICAgICAgICA9IC90bXAKbGMtbWVzc2FnZXMtZGlyID0gL3Vzci9zaGFyZS9teXNxbApza2lwLWV4dGVybmFsLWxvY2tpbmcKc2tpcC1uYW1lLXJlc29sdmU9MQoKYmluZC1hZGRyZXNzICAgICAgICAgICAgPSAqCmtleV9idWZmZXJfc2l6ZSA9IDEyOE0KCm15aXNhbV9zb3J0X2J1ZmZlcl9zaXplID0gNE0KbWF4X2FsbG93ZWRfcGFja2V0ICAgICAgPSA2NE0KbXlpc2FtLXJlY292ZXItb3B0aW9ucyA9IEJBQ0tVUAptYXhfbGVuZ3RoX2Zvcl9zb3J0X2RhdGEgPSA4MTkyCnF1ZXJ5X2NhY2hlX2xpbWl0ICAgICAgID0gNE0KcXVlcnlfY2FjaGVfc2l6ZSAgICAgICAgPSAwCnF1ZXJ5X2NhY2hlX3R5cGUJPSAwCgpleHBpcmVfbG9nc19kYXlzICAgICAgICA9IDEwCm1heF9iaW5sb2dfc2l6ZSAgICAgICAgID0gMTAwTQoKbWF4X2Nvbm5lY3Rpb25zICA9IDIwMDAgI3JlY29tbWVuZGVkIGZvciAxNkdCIHJhbSAKYmFja19sb2cgPSA0MDk2Cm9wZW5fZmlsZXNfbGltaXQgPSAxNjM4NAppbm5vZGJfb3Blbl9maWxlcyA9IDE2Mzg0Cm1heF9jb25uZWN0X2Vycm9ycyA9IDMwNzIKdGFibGVfb3Blbl9jYWNoZSA9IDQwOTYKdGFibGVfZGVmaW5pdGlvbl9jYWNoZSA9IDQwOTYKCgp0bXBfdGFibGVfc2l6ZSA9IDFHCm1heF9oZWFwX3RhYmxlX3NpemUgPSAxRwoKaW5ub2RiX2J1ZmZlcl9wb29sX3NpemUgPSAxMkcgI3JlY29tbWVuZGVkIGZvciAxNkdCIHJhbQppbm5vZGJfYnVmZmVyX3Bvb2xfaW5zdGFuY2VzID0gMQppbm5vZGJfcmVhZF9pb190aHJlYWRzID0gNjQKaW5ub2RiX3dyaXRlX2lvX3RocmVhZHMgPSA2NAppbm5vZGJfdGhyZWFkX2NvbmN1cnJlbmN5ID0gMAppbm5vZGJfZmx1c2hfbG9nX2F0X3RyeF9jb21taXQgPSAwCmlubm9kYl9mbHVzaF9tZXRob2QgPSBPX0RJUkVDVApwZXJmb3JtYW5jZV9zY2hlbWEgPSBPTgppbm5vZGItZmlsZS1wZXItdGFibGUgPSAxCmlubm9kYl9pb19jYXBhY2l0eT0yMDAwMAppbm5vZGJfdGFibGVfbG9ja3MgPSAwCmlubm9kYl9sb2NrX3dhaXRfdGltZW91dCA9IDAKaW5ub2RiX2RlYWRsb2NrX2RldGVjdCA9IDAKaW5ub2RiX2xvZ19maWxlX3NpemUgPSA1MTJNCgpzcWwtbW9kZT0iTk9fRU5HSU5FX1NVQlNUSVRVVElPTiIKCltteXNxbGR1bXBdCnF1aWNrCnF1b3RlLW5hbWVzCm1heF9hbGxvd2VkX3BhY2tldCAgICAgID0gMTZNCgpbbXlzcWxdCgpbaXNhbWNoa10Ka2V5X2J1ZmZlcl9zaXplICAgICAgICAgICAgICA9IDE2TQo=")
 rSysCtl = "# XtreamCodes\n\nnet.ipv4.tcp_congestion_control = bbr\nnet.core.default_qdisc = fq\nnet.ipv4.tcp_rmem = 8192 87380 134217728\nnet.ipv4.udp_rmem_min = 16384\nnet.core.rmem_default = 262144\nnet.core.rmem_max = 268435456\nnet.ipv4.tcp_wmem = 8192 65536 134217728\nnet.ipv4.udp_wmem_min = 16384\nnet.core.wmem_default = 262144\nnet.core.wmem_max = 268435456\nnet.core.somaxconn = 1000000\nnet.core.netdev_max_backlog = 250000\nnet.core.optmem_max = 65535\nnet.ipv4.tcp_max_tw_buckets = 1440000\nnet.ipv4.tcp_max_orphans = 16384\nnet.ipv4.ip_local_port_range = 2000 65000\nnet.ipv4.tcp_no_metrics_save = 1\nnet.ipv4.tcp_slow_start_after_idle = 0\nnet.ipv4.tcp_fin_timeout = 15\nnet.ipv4.tcp_keepalive_time = 300\nnet.ipv4.tcp_keepalive_probes = 5\nnet.ipv4.tcp_keepalive_intvl = 15\nfs.file-max=20970800\nfs.nr_open=20970800\nfs.aio-max-nr=20970800\nnet.ipv4.tcp_timestamps = 1\nnet.ipv4.tcp_window_scaling = 1\nnet.ipv4.tcp_mtu_probing = 1\nnet.ipv4.route.flush = 1\nnet.ipv6.route.flush = 1"
-rSystemd = "[Unit]\nSourcePath=/home/xtreamcodes/service\nDescription=XtreamCodes Service\nAfter=network.target\nStartLimitIntervalSec=0\n\n[Service]\nType=simple\nUser=root\nRestart=always\nRestartSec=1\nExecStart=/bin/bash /home/xtreamcodes/iptv_xtream_codes/xtreamcodes start\nExecReload=/bin/bash /home/xtreamcodes/iptv_xtream_codes/xtreamcodes restart\nExecStop=/bin/bash /home/xtreamcodes/iptv_xtream_codes/xtreamcodes stop\n\n[Install]\nWantedBy=multi-user.target"
+
+initd_script = """#!/bin/sh
+SCRIPT=/home/xtreamcodes/iptv_xtream_codes/xtreamcodes
+NAME=xtreamcodes
+
+case "$1" in
+  start)
+    $SCRIPT start
+    ;;
+  stop)
+    $SCRIPT stop
+    ;;
+  restart)
+    $SCRIPT restart
+    ;;
+  reload)
+    $SCRIPT reload
+    ;;
+  status)
+    pids=$(pgrep -u xtreamcodes nginx | wc -l)
+    if [ "$pids" -gt 0 ]; then
+      echo "$NAME is running"
+    else
+      echo "$NAME is stopped"
+    fi
+    ;;
+  *)
+    echo "Usage: /etc/init.d/$NAME {start|stop|restart|reload|status}"
+    exit 1
+    ;;
+esac
+
+exit 0
+
+"""
 
 if sys.version_info.major != 3:
     printc("Please run with python3.")
@@ -21,12 +55,9 @@ if sys.version_info.major != 3:
 rPath = os.path.dirname(os.path.realpath(__file__))
 
 rVersions = {
-    "14.04": "trusty",
-    "16.04": "xenial",
     "18.04": "bionic",
     "20.04": "focal",
     "22.04": "jammy",
-    "23.04": "lunar",
     "24.04": "noble"
 }
 
@@ -134,7 +165,7 @@ def install(rType="MAIN"):
         printc("Installing Software")
         os.system('unzip "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" > /dev/null')
         if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/xtreamcodes"): 
-            os.system("wget -q https://github.com/xoceunder/Xtream-UI-Ubuntu20.04/raw/main/xtreamcodes -O /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
+            os.system("wget -q https://github.com/xoceunder/Xtream-UI-install/raw/main/xtreamcodes -O /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
             os.system("sudo chmod +x /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
         try: os.remove("/tmp/xtreamcodes.zip")
         except: pass
@@ -243,17 +274,12 @@ def configure():
         os.system('echo "xtreamcodes ALL = (root) NOPASSWD: /sbin/iptables, /usr/bin/chattr, /usr/bin/python3, /usr/bin/python" >> /etc/sudoers')
     if os.path.exists("/etc/init.d/xtreamcodes"):
         os.remove("/etc/init.d/xtreamcodes")
-    if os.path.exists("/etc/systemd/system/xtreamcodes.service"):
-        os.remove("/etc/systemd/system/xtreamcodes.service")
-    if not os.path.exists("/etc/systemd/system/xtreamcodes.service"):
-        with io.open(
-            "/etc/systemd/system/xtreamcodes.service", "w", encoding="utf-8"
-        ) as f:
-            f.write(rSystemd)
-        os.system("sudo chmod +x /etc/systemd/system/xtreamcodes.service")
-        os.system("sudo systemctl daemon-reload > /dev/null")
-        os.system("sudo systemctl enable xtreamcodes > /dev/null")
-
+    if not os.path.exists("/etc/init.d/xtreamcodes"):
+        with io.open("/etc/init.d/xtreamcodes", "w", encoding="utf-8") as f:
+            f.write(initd_script)
+        os.system("sudo chmod +x /etc/init.d/xtreamcodes")
+        os.system("sudo update-rc.d xtreamcodes defaults")
+    printc("Service XtreamCodes installed in /etc/init.d/xtreamcodes")
     printc("Custom sysctl.conf - If you have your own custom sysctl.conf, type N or it will be overwritten. If you don't know what a sysctl configuration is, type Y as it will correctly set your TCP settings and open file limits.", col.BRIGHT_YELLOW)
     print(" ")
     while True:
@@ -298,12 +324,15 @@ def configure():
     if not "api.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    api.xtream-codes.com" >> /etc/hosts')
     if not "downloads.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    downloads.xtream-codes.com" >> /etc/hosts')
     if not "xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    xtream-codes.com" >> /etc/hosts')
-    if not "@reboot root /home/xtreamcodes/iptv_xtream_codes/start_services.sh" in open("/etc/crontab").read(): os.system('echo "@reboot root /home/xtreamcodes/iptv_xtream_codes/start_services.sh" >> /etc/crontab')
+    if not "@reboot root /etc/init.d/xtreamcodes start" in open("/etc/crontab").read(): os.system('echo "@reboot root /etc/init.d/xtreamcodes start" >> /etc/crontab')
 
 def start(first=True):
-    if first: printc("Starting Xtream Codes")
-    else: printc("Restarting Xtream Codes")
-    os.system("/home/xtreamcodes/iptv_xtream_codes/start_services.sh > /dev/null")
+    if first: 
+        printc("Starting Xtream Codes")
+        os.system("sudo /etc/init.d/xtreamcodes start > /dev/null")
+    else: 
+        printc("Restarting Xtream Codes")
+        os.system("sudo /etc/init.d/xtreamcodes restart > /dev/null")
 
 def modifyNginx():
     printc("Modifying Nginx")
