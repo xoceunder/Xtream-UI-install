@@ -21,6 +21,7 @@ sudo /etc/init.d/xtreamcodes start
 ```
 | Command | Description |
 |---------|------------|
+| `status` | Status the panel |
 | `start` | Start the panel |
 | `stop` | Stop the panel |
 | `restart` | Restart the panel |
