@@ -4,7 +4,7 @@
 </a>
 </p>
 
-# XTREAM Server
+## 📌 About Xtream Server
 Installer Xtream-UI currently supports linux 18, 20, 22, 24
 This is an installation mirror for xtream ui software on Ubuntu. Includes MariaDB 11.5 and NGINX 1.26.0 and PHP 7.4.33.
 
