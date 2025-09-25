@@ -13,6 +13,14 @@ Update your ubuntu first, then install panel:
 ``` 
 rm -rf install.py && wget https://github.com/xoceunder/Xtream-UI-install/raw/main/install.py && sudo python3 install.py 
 ```
+## 📡 Streaming URLs
+| Platform | URL Format |
+|----------|------------|
+| **XtreamCodes** | `http://<host>:25500` |
+| **MAG/Stalker Portal** | `http://<host>:25461/stalker_portal/c/` |
+| **M3U Playlist** | `http://<host>:25461/get.php?username=test&password=test&type=m3u_plus&output=ts` |
+
+📌 **Refer to the API documentation for details on GET request parameters.**
 
 ## 🛠️ Managing the Panel
 To start the Xtream Codes panel, use:
