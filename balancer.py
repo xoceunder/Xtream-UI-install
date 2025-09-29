@@ -46,8 +46,7 @@ def encrypt(rHost="127.0.0.1", rUsername="user_iptvpro", rPassword="", rDatabase
     rf.close()
 
 def configure():
-    rYou = "https://xtreamtools.org/XCodes/youtube-dl" 
-    rCheckGeo = "https://xtreamtools.org/XCodes/check_geolite.sh"
+    rYou = "https://yt-dl.org/downloads/latest/youtube-dl" 
     if not "/home/xtreamcodes/iptv_xtream_codes/" in open("/etc/fstab").read():
         rFile = open("/etc/fstab", "a")
         rFile.write("tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0\ntmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0")
@@ -67,14 +66,11 @@ def configure():
     os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
     os.system("chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
     os.system("rm /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
-    os.system("wget -q https://xtreamtools.org/XCodes/GeoLite2.mmdb -O /home/xtreamcodes/iptv_xtream_codes/XCodes/GeoLite2.mmdb")
-    os.system("wget -q https://xtreamtools.org/XCodes/pid_monitor.php -O /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php")
-    os.system("wget -q https://xtreamtools.org/XCodes/config.py -O /home/xtreamcodes/iptv_xtream_codes/config.py")
+    os.system("wget -q https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/GeoLite2.mmdb -O /home/xtreamcodes/iptv_xtream_codes/XCodes/GeoLite2.mmdb")
+    os.system("wget -q https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/pid_monitor.php -O /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php")
     os.system("rm /usr/local/bin/youtube-dl 2>/dev/null")
     os.system('wget -q -O "/usr/local/bin/youtube-dl" "%s"' % rYou)
     os.system("sudo chmod a+rx /usr/local/bin/youtube-dl")
-    os.system('wget -q -O "/home/xtreamcodes/iptv_xtream_codes/check_geolite.sh" "%s"' % rCheckGeo)
-    if not "check_geolite.sh" in open("/etc/crontab").read(): os.system('echo "*/1 *   * * * root /home/xtreamcodes/iptv_xtream_codes/./check_geolite.sh" >> /etc/crontab')
     if not "/home/xtreamcodes 2>/dev/null" in open("/home/xtreamcodes/iptv_xtream_codes/start_services.sh").read():   
         os.system("sed -i 's|chown -R xtreamcodes:xtreamcodes /home/xtreamcodes|chown -R xtreamcodes:xtreamcodes /home/xtreamcodes 2>/dev/null|g' /home/xtreamcodes/iptv_xtream_codes/start_services.sh")
         os.system("sed -i 's|chmod -R 777 /home/xtreamcodes|chmod -R 777 /home/xtreamcodes 2>/dev/null|g' /home/xtreamcodes/iptv_xtream_codes/start_services.sh")
