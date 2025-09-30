@@ -324,12 +324,12 @@ def configure():
     if not "api.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    api.xtream-codes.com" >> /etc/hosts')
     if not "downloads.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    downloads.xtream-codes.com" >> /etc/hosts')
     if not "xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    xtream-codes.com" >> /etc/hosts')
-    if not "@reboot root /etc/init.d/xtreamcodes start" in open("/etc/crontab").read(): os.system('echo "@reboot root /etc/init.d/xtreamcodes start" >> /etc/crontab')
+    if not "@reboot root /etc/init.d/xtreamcodes restart" in open("/etc/crontab").read(): os.system('echo "@reboot root /etc/init.d/xtreamcodes restart" >> /etc/crontab')
 
 def start(first=True):
     if first: 
         printc("Starting Xtream Codes")
-        os.system("sudo /etc/init.d/xtreamcodes start > /dev/null")
+        os.system("sudo /etc/init.d/xtreamcodes restart > /dev/null")
     else: 
         printc("Restarting Xtream Codes")
         os.system("sudo /etc/init.d/xtreamcodes restart > /dev/null")
