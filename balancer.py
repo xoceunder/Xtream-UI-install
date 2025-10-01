@@ -55,7 +55,6 @@ def prepare():
         try: os.remove(rFile)
         except: pass
     os.system("apt-get update > /dev/null")
-    os.system("apt-get -y full-upgrade > /dev/null")
     for rPackage in rPackages: os.system("apt-get install %s -y > /dev/null" % rPackage)
     os.system("apt-get install -y > /dev/null") # Clean up above
     os.system("adduser --system --shell /bin/false --group --disabled-login xtreamcodes > /dev/null")
