@@ -376,7 +376,7 @@ if __name__ == "__main__":
             rHost = "127.0.0.1"
             rPassword = generate()
             rServerID = 1
-        rUsername = generate()
+            rUsername = generate()
         rDatabase = "xtream_iptvpro"
         rPort = 7999
         if len(rHost) > 0 and len(rPassword) > 0 and rServerID > -1:
