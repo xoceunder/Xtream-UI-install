@@ -166,7 +166,7 @@ def install(rType="MAIN"):
     os.system('wget -q -O "/tmp/xtreamcodes.zip" "%s"' % rURL)
     if os.path.exists("/tmp/xtreamcodes.zip"):
         printc("Installing Software")
-        os.system('unzip "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" > /dev/null')
+        os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" > /dev/null')
         if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/xtreamcodes"): 
             os.system("wget -q https://github.com/xoceunder/Xtream-UI-install/raw/main/xtreamcodes -O /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
             os.system("sudo chmod +x /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
