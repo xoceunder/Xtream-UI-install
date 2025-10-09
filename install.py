@@ -6,7 +6,7 @@ from zipfile import ZipFile
 from urllib.request import urlopen
 
 rDownloadURL = {"main": "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/main_xui_xoceunder.zip", "sub": "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/sub_xui_xoceunder.zip"}
-rPackages = ["cpufrequtils", "iproute2", "python", "net-tools", "dirmngr", "gpg-agent", "software-properties-common", "libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fsprogs", "wget", "sysstat", "alsa-utils", "v4l-utils", "mcrypt", "nscd", "htop", "iptables-persistent", "libjpeg-dev", "libpng-dev", "php-ssh2", "xz-utils", "zip", "unzip", "mc", "libpng16-16", "libzip5", "mariadb-server", "rsync", "libmaxminddb0", "libmaxminddb-dev", "python3-paramiko", "python-is-python3"]
+rPackages = ["cpufrequtils", "iproute2", "python", "net-tools", "dirmngr", "gpg-agent", "software-properties-common", "libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fsprogs", "wget", "sysstat", "alsa-utils", "v4l-utils", "mcrypt", "nscd", "htop", "iptables-persistent", "libjpeg-dev", "libpng-dev", "php-ssh2", "xz-utils", "zip", "unzip", "mc", "libpng16-16", "libzip5", "mariadb-common", "mariadb-server", "rsync", "libmaxminddb0", "libmaxminddb-dev", "python3-paramiko", "python-is-python3"]
 rRemove = ["mysql-server"]
 rInstall = {"MAIN": "main", "LB": "sub"}
 rUpdate = {"UPDATE": "update"}
@@ -131,8 +131,8 @@ def prepare(rType="MAIN"):
     if rType == "MAIN":
         os.system("sudo apt-get -yq install software-properties-common > /dev/null 2>&1")
         printc("Adding repo: Ubuntu %s" % getCodename())
-        os.system("sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' > /dev/null 2>&1")
-        os.system("sudo add-apt-repository -y 'deb [arch=amd64,arm64,ppc64el] http://mirror.23media.com/mariadb/repo/11.5/ubuntu %s main' > /dev/null 2>&1" % getCodename())
+        #os.system("sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' > /dev/null 2>&1")
+        #os.system("sudo add-apt-repository -y 'deb [arch=amd64,arm64,ppc64el] http://mirror.23media.com/mariadb/repo/11.5/ubuntu %s main' > /dev/null 2>&1" % getCodename())
         os.system("apt-get update > /dev/null 2>&1")
     for rPackage in rRemove:
         if is_installed(rPackage):
