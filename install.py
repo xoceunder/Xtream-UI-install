@@ -367,6 +367,7 @@ if __name__ == "__main__":
     if rType.upper() in ["MAIN", "LB"]:
         if rType.upper() == "LB":
             rHost = input("  Main Server IP Address: ")
+            rUsername = input("  MySQL Username: ")
             rPassword = input("  MySQL Password: ")
             try: rServerID = int(input("  Load Balancer Server ID: "))
             except: rServerID = -1
