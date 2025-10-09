@@ -243,7 +243,7 @@ def mysql(rUsername, rPassword):
         except: printc("Invalid password! Try again", col.BRIGHT_RED)
     return False
 
-def encrypt(rHost="127.0.0.1", rUsername="user_iptvpro", rPassword="", rDatabase="xtream_iptvpro", rServerID=1, rPort=7999):
+def encrypt(rHost="127.0.0.1", rUsername="", rPassword="", rDatabase="xtream_iptvpro", rServerID=1, rPort=7999):
     if os.path.isfile('/home/xtreamcodes/iptv_xtream_codes/config'):
         rDecrypt = decrypt()
         rHost = rDecrypt["host"]
