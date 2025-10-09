@@ -142,6 +142,9 @@ def prepare(rType="MAIN"):
         if not is_installed(rPackage):
             printc("Installing %s" % rPackage)
             subprocess.run(f"sudo DEBIAN_FRONTEND=noninteractive apt-get install {rPackage} -yq > /dev/null 2>&1", shell=True)
+    if not is_installed("libssl1.1"):
+        printc("Installing libssl1.1")
+        subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && rm -rf libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1", shell=True)
     os.system("apt-get install -f -y > /dev/null") # Clean up above
     os.system("systemctl start mariadb > /dev/null")
     try:
