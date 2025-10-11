@@ -98,9 +98,12 @@ def getIP():
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
-def def getVersion():
-    try: return subprocess.check_output("lsb_release -d".split()).split(":")[-1].strip()
-    except: return ""
+def getVersion():
+    try:
+        output = subprocess.check_output("lsb_release -d".split()).decode().strip()
+        return output.split(":")[-1].strip()  # → "Ubuntu 22.04.5 LTS"
+    except:
+        return ""
     
 def getCodename():
     try: return os.popen("lsb_release -sc").read().strip()
@@ -308,6 +311,7 @@ def configure():
             rFile.close()
             os.system("sudo sysctl -p >/dev/null 2>&1")
             rFile = open("/home/xtreamcodes/iptv_xtream_codes/sysctl.on", "w")
+            rFile.write("1")
             rFile.close()
         except:
             printc("Failed to write to sysctl file.", col.BRIGHT_RED)
@@ -382,7 +386,19 @@ if __name__ == "__main__":
             except: rServerID = -1
             print(" ")
         else:
-            ssh_pwd = input(" Root Ssh Password: ")
+            printc("To have a successful installation, you must add the root user password to configure the Main Server perfectly.", col.BRIGHT_YELLOW)
+            print(" ")
+            max_tries = 3
+            tries = 0
+            ssh_pwd = ""
+            while tries < max_tries and not ssh_pwd.strip():
+                ssh_pwd = input(" Root SSH Password: ").strip()
+                if not ssh_pwd:
+                    tries += 1
+                    printc("Cannot be empty. Remaining attempts: %s" % (max_tries - tries), col.BRIGHT_YELLOW)
+            if not ssh_pwd:
+                printc("I did not enter a password. Aborting installation.", col.BRIGHT_RED)
+                sys.exit(1)
             rHost = "127.0.0.1"
             rUsername = generate()
             rPassword = generate()
