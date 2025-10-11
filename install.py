@@ -99,12 +99,9 @@ def getIP():
     return s.getsockname()[0]
 
 def getVersion():
-    try:
-        output = subprocess.check_output("lsb_release -d".split()).decode().strip()
-        return output.split(":")[-1].strip()  # → "Ubuntu 22.04.5 LTS"
-    except:
-        return ""
-    
+    try: return subprocess.check_output("lsb_release -d".split()).decode().strip().split(":")[-1].strip()
+    except: return ""
+  
 def getCodename():
     try: return os.popen("lsb_release -sc").read().strip()
     except: return ""
