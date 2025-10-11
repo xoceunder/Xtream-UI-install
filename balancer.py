@@ -141,9 +141,8 @@ def configure():
     if not "xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    xtream-codes.com" >> /etc/hosts')
     if os.path.exists("/home/xtreamcodes/iptv_xtream_codes/start_services.sh"):
         os.remove("/home/xtreamcodes/iptv_xtream_codes/start_services.sh")
-    if not "@reboot root /etc/init.d/xtreamcodes restart" in open("/etc/crontab").read(): os.system('echo "@reboot root /etc/init.d/xtreamcodes restart" >> /etc/crontab')
 
-def start(): os.system("sudo /etc/init.d/xtreamcodes start > /dev/null")
+def start(): os.system("sudo systemctl start xtreamcodes > /dev/null")
 
 def setPorts(rPorts):
     os.system("sed -i 's/listen 25461;/listen %d;/g' /home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf" % rPorts[0])
