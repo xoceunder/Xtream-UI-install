@@ -11,6 +11,15 @@ rPackages = ["libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fspro
 rSysCtl = "# XtreamCodes\n\nnet.ipv4.tcp_congestion_control = bbr\nnet.core.default_qdisc = fq\nnet.ipv4.tcp_rmem = 8192 87380 134217728\nnet.ipv4.udp_rmem_min = 16384\nnet.core.rmem_default = 262144\nnet.core.rmem_max = 268435456\nnet.ipv4.tcp_wmem = 8192 65536 134217728\nnet.ipv4.udp_wmem_min = 16384\nnet.core.wmem_default = 262144\nnet.core.wmem_max = 268435456\nnet.core.somaxconn = 1000000\nnet.core.netdev_max_backlog = 250000\nnet.core.optmem_max = 65535\nnet.ipv4.tcp_max_tw_buckets = 1440000\nnet.ipv4.tcp_max_orphans = 16384\nnet.ipv4.ip_local_port_range = 2000 65000\nnet.ipv4.tcp_no_metrics_save = 1\nnet.ipv4.tcp_slow_start_after_idle = 0\nnet.ipv4.tcp_fin_timeout = 15\nnet.ipv4.tcp_keepalive_time = 300\nnet.ipv4.tcp_keepalive_probes = 5\nnet.ipv4.tcp_keepalive_intvl = 15\nfs.file-max=20970800\nfs.nr_open=20970800\nfs.aio-max-nr=20970800\nnet.ipv4.tcp_timestamps = 1\nnet.ipv4.tcp_window_scaling = 1\nnet.ipv4.tcp_mtu_probing = 1\nnet.ipv4.route.flush = 1\nnet.ipv6.route.flush = 1"
 
 initd_script = """#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          xtreamcodes
+# Required-Start:    $network $local_fs $remote_fs $time
+# Required-Stop:     $network $local_fs $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Xtream Codes IPTV Panel
+# Description:       Controla el servicio Xtream Codes IPTV Panel (start|stop|restart|reload)
+### END INIT INFO
 SCRIPT=/home/xtreamcodes/iptv_xtream_codes/xtreamcodes
 NAME=xtreamcodes
 
@@ -45,6 +54,13 @@ exit 0
 
 """
 
+def is_installed(package_name):
+    try:
+        subprocess.run(['dpkg', '-s', package_name], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
 def getVersion():
     try: return subprocess.check_output("lsb_release -d".split()).split(":")[-1].strip()
     except: return ""
@@ -56,6 +72,8 @@ def prepare():
         except: pass
     os.system("apt-get update > /dev/null")
     for rPackage in rPackages: os.system("apt-get install %s -y > /dev/null" % rPackage)
+    if not is_installed("libssl1.1"):
+        subprocess.run("wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1 && rm -rf libssl1.1_1.1.0g-2ubuntu4_amd64.deb > /dev/null 2>&1", shell=True)
     os.system("apt-get install -y > /dev/null") # Clean up above
     os.system("adduser --system --shell /bin/false --group --disabled-login xtreamcodes > /dev/null")
     if not os.path.exists("/home/xtreamcodes"): os.mkdir("/home/xtreamcodes")
@@ -91,7 +109,8 @@ def configure():
         rFile = open("/etc/init.d/xtreamcodes", "w")
         rFile.write(initd_script)
         rFile.close()
-        os.system("chmod +x /etc/init.d/xtreamcodes > /dev/null")
+        os.system("sudo chmod +x /etc/init.d/xtreamcodes")
+        os.system("sudo update-rc.d xtreamcodes defaults")
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/xtreamcodes"): 
         os.system("wget -q https://github.com/xoceunder/Xtream-UI-install/raw/main/xtreamcodes -O /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
         os.system("sudo chmod +x /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
