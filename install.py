@@ -361,11 +361,13 @@ if __name__ == "__main__":
         printc("Unsupported Operating System, Ubuntu %s" % rVersion, col.GREEN, 2)
         sys.exit(1)
     if rVersion == "20.04":
-        rPackages.append("libzip5")
+        libzip = "libzip5"
     elif rVersion == "18.04":
-        rPackages.append("libzip4")
+        libzip = "libzip4"
     else:
-        rPackages.append("libzip5")
+        libzip = "libzip5"
+    index = rPackages.index("mariadb-server")
+    rPackages.insert(index, libzip)
     printc("XtreamUI 22f Ubuntu %s - Moded XoceUnder" % rVersion, col.GREEN, 2)
     print(" ")
     rType = input("  Installation Type [MAIN, LB, UPDATE]: ")
