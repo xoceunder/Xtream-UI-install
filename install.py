@@ -140,8 +140,6 @@ def prepare(rType="MAIN"):
     if rType == "MAIN":
         os.system("sudo apt-get -yq install software-properties-common > /dev/null 2>&1")
         printc("Adding repo: Ubuntu %s" % getCodename())
-        #os.system("sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' > /dev/null 2>&1")
-        #os.system("sudo add-apt-repository -y 'deb [arch=amd64,arm64,ppc64el] http://mirror.23media.com/mariadb/repo/11.5/ubuntu %s main' > /dev/null 2>&1" % getCodename())
         os.system("apt-get update > /dev/null 2>&1")
     for rPackage in rRemove:
         if is_installed(rPackage):
@@ -336,15 +334,14 @@ def configure():
     if not "api.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    api.xtream-codes.com" >> /etc/hosts')
     if not "downloads.xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    downloads.xtream-codes.com" >> /etc/hosts')
     if not "xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    xtream-codes.com" >> /etc/hosts')
-    if not "@reboot root /etc/init.d/xtreamcodes restart" in open("/etc/crontab").read(): os.system('echo "@reboot root /etc/init.d/xtreamcodes restart" >> /etc/crontab')
 
 def start(first=True):
     if first: 
         printc("Starting Xtream Codes")
-        os.system("sudo /etc/init.d/xtreamcodes restart > /dev/null")
+        os.system("sudo systemctl start xtreamcodes > /dev/null")
     else: 
         printc("Restarting Xtream Codes")
-        os.system("sudo /etc/init.d/xtreamcodes restart > /dev/null")
+        os.system("sudo systemctl restart xtreamcodes > /dev/null")
 
 def modifyNginx():
     printc("Modifying Nginx")
