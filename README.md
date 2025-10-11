@@ -25,7 +25,7 @@ rm -rf install.py && wget https://github.com/xoceunder/Xtream-UI-install/raw/mai
 ## 🛠️ Managing the Panel
 To start the Xtream Codes panel, use:
 ```sh
-sudo /etc/init.d/xtreamcodes start
+sudo systemctl start xtreamcodes
 ```
 | Command | Description |
 |---------|------------|
