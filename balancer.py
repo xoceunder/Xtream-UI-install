@@ -87,7 +87,7 @@ def install():
     rURL = rDownloadURL
     os.system('wget -q -O "/tmp/xtreamcodes.zip" "%s"' % rURL)
     if os.path.exists("/tmp/xtreamcodes.zip"):
-        os.system('unzip "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" > /dev/null')
+        os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" > /dev/null')
         try: os.remove("/tmp/xtreamcodes.zip")
         except: pass
         return True
