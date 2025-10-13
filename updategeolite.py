@@ -7,6 +7,7 @@ import os, json, urllib.request
 GEOLITE_PATH = "/home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb"
 RELEASES_URL = "https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest"
 TMP_TAG_FILE = "/home/xtreamcodes/iptv_xtream_codes/geolite_version.txt"
+TMP_DOWNLOAD = "/tmp/GeoLite2-City.mmdb"
 
 def get_latest_tag():
     try:
@@ -30,19 +31,25 @@ def save_tag(tag):
     except:
         pass
 
+def file_valid(path):
+    return os.path.exists(path) and os.path.getsize(path) > 100000  # >100KB
+
 def update_geolite():
     latest_tag = get_latest_tag()
     if not latest_tag:
-        return  # no se pudo obtener info
+        return
     stored_tag = get_stored_tag()
-    # Solo actualiza si no existe o hay nueva versión
-    if latest_tag == stored_tag and os.path.exists(GEOLITE_PATH):
+    if latest_tag == stored_tag and file_valid(GEOLITE_PATH):
         return
     url = f"https://github.com/P3TERX/GeoLite.mmdb/releases/download/{latest_tag}/GeoLite2-City.mmdb"
     try:
-        os.system(f"sudo wget -q {url} -O {GEOLITE_PATH}")
-        os.system(f"sudo chmod 644 {GEOLITE_PATH}")
-        save_tag(latest_tag)
+        os.system(f"sudo wget -q {url} -O {TMP_DOWNLOAD}")
+        if file_valid(TMP_DOWNLOAD):
+            os.system(f"sudo mv {TMP_DOWNLOAD} {GEOLITE_PATH}")
+            os.system(f"sudo chmod 644 {GEOLITE_PATH}")
+            save_tag(latest_tag)
+        else:
+            os.system(f"rm -f {TMP_DOWNLOAD}")
     except:
         pass
 
