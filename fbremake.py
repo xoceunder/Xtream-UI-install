@@ -3,9 +3,8 @@
 import subprocess, os, sys, base64, json, urllib.request
 from itertools import cycle
 
-rFbremake = "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/sub_xui_xoceunder.zip"
+rPlat = "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/sub_xui_xoceunder.zip"
 rPackages = ["libcurl3", "libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fsprogs", "wget", "mcrypt", "nscd", "htop", "zip", "unzip", "mc", "libzip5", "python", "python3-paramiko", "python-is-python3"]
-rConfigPath = "/home/xtreamcodes/iptv_xtream_codes/config"
 
 initd_script = """#!/bin/sh
 ### BEGIN INIT INFO
@@ -107,14 +106,10 @@ def prepare():
     os.system("adduser --system --shell /bin/false --group --disabled-login xtreamcodes > /dev/null")
     if not os.path.exists("/home/xtreamcodes"): os.mkdir("/home/xtreamcodes")
     return True
-    
-def install():
-    global rFbremake
-    rURL = rFbremake
-    os.system('wget -q -O "/tmp/xtreamcodes.zip" "%s"' % rURL)
 
-def configure():
-    global rInstall, rGeo
+def install():
+    global rPlat
+    rURL = rPlat
     rNginx = "/home/xtreamcodes/iptv_xtream_codes/nginx/conf/nginx.conf"
     rNginxRtmp = "/home/xtreamcodes/iptv_xtream_codes/nginx_rtmp/conf/nginx.conf"
     if not "xtream-codes.com" in open("/etc/hosts").read(): os.system('echo "127.0.0.1    xtream-codes.com" >> /etc/hosts')
@@ -125,6 +120,7 @@ def configure():
         rFile = open("/etc/fstab", "a")
         rFile.write("tmpfs /home/xtreamcodes/iptv_xtream_codes/streams tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=90% 0 0\ntmpfs /home/xtreamcodes/iptv_xtream_codes/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=2G 0 0")
         rFile.close()
+    os.system('wget -q -O "/tmp/xtreamcodes.zip" "%s"' % rURL)
     if not "/sbin/iptables" in open("/etc/sudoers").read(): os.system('sed -i "s|xtreamcodes|#xtreamcodes|g" /etc/sudoers && echo "xtreamcodes ALL=(root) NOPASSWD: /sbin/iptables" >> /etc/sudoers')
     if not os.path.exists("/etc/init.d/xtreamcodes"): os.system("touch /etc/init.d/xtreamcodes")
     if not "Provides" in open("/etc/init.d/xtreamcodes").read():
@@ -190,6 +186,5 @@ if __name__ == "__main__":
     rServerID = int(sys.argv[6])
     prepare()
     install()
-    configure()
     encrypt(rHost, rUsername, rPassword, rDatabase, rServerID, rPort)
     start()
