@@ -39,13 +39,13 @@ def update_geolite():
     if not latest_tag:
         return
     stored_tag = get_stored_tag()
-    
+
     if latest_tag == stored_tag and file_valid(GEOLITE_PATH):
         return
 
     url = f"https://github.com/P3TERX/GeoLite.mmdb/releases/download/{latest_tag}/GeoLite2-City.mmdb"
     os.system(f"wget -q {url} -O {TMP_DOWNLOAD}")
-
+    
     if file_valid(TMP_DOWNLOAD):
         try:
             os.makedirs(os.path.dirname(GEOLITE_PATH), exist_ok=True)
