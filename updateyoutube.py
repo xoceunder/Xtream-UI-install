@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # update panel
-import subprocess, os
+import subprocess, os, sys
+from itertools import cycle
 
 def updateyoutube():
     os.system("sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/youtube-dl")
