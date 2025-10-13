@@ -44,22 +44,15 @@ def update_geolite():
         return
 
     url = f"https://github.com/P3TERX/GeoLite.mmdb/releases/download/{latest_tag}/GeoLite2-City.mmdb"
-    os.system(f"wget -q {url} -O {TMP_DOWNLOAD}")
-    
-    if file_valid(TMP_DOWNLOAD):
-        try:
-            #os.makedirs(os.path.dirname(GEOLITE_PATH), exist_ok=True)
-            os.remove(GEOLITE_PATH)
-            shutil.move(TMP_DOWNLOAD, GEOLITE_PATH)
-            os.chmod(GEOLITE_PATH, 0644)
-            save_tag(latest_tag)
-        except:
-            pass
-    else:
-        try:
-            os.remove(TMP_DOWNLOAD)
-        except:
-            pass
+
+    try:
+        os.system(f"chattr -i {GEOLITE_PATH} > /dev/null")
+        os.system(f"wget -q {url} -O {GEOLITE_PATH}")
+        os.system(f"chown xtreamcodes:xtreamcodes -R {GEOLITE_PATH}")
+        os.system(f"chattr +i {GEOLITE_PATH} > /dev/null")
+        save_tag(latest_tag)
+    except:
+        pass
 
 if __name__ == "__main__":
     update_geolite()
