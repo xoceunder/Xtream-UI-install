@@ -15,7 +15,7 @@ def encrypt(rHost="127.0.0.1", rUsername="", rPassword="", rDatabase="xtream_ipt
 def start(): 
     os.system("chown xtreamcodes:xtreamcodes /home/xtreamcodes/iptv_xtream_codes/config")
     os.system("chmod 0700 /home/xtreamcodes/iptv_xtream_codes/config")
-    os.system("sudo systemctl restart xtreamcodes > /dev/null")
+    os.system("sudo systemctl restart xtreamcodes")
 
 if __name__ == "__main__":
     rHost = sys.argv[1]
