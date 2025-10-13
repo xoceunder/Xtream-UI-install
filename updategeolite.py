@@ -49,6 +49,7 @@ def update_geolite():
     if file_valid(TMP_DOWNLOAD):
         try:
             #os.makedirs(os.path.dirname(GEOLITE_PATH), exist_ok=True)
+            os.remove(GEOLITE_PATH)
             shutil.move(TMP_DOWNLOAD, GEOLITE_PATH)
             os.chmod(GEOLITE_PATH, 0644)
             save_tag(latest_tag)
