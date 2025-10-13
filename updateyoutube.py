@@ -4,7 +4,7 @@
 
 import os, json, urllib.request
 
-YTDLP_PATH = "/usr/local/bin/yt-dlp"
+YTDLP_PATH = "/usr/local/bin/youtube-dl"
 RELEASES_URL = "https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest"
 
 def get_latest_version():
