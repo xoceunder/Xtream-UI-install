@@ -36,7 +36,7 @@ def main():
     local_ver = get_local_version()
     latest_ver, url = get_latest_version()
     if not url:
-        return  # no se pudo obtener info del release
+        return  # Could not get release info
     if local_ver != latest_ver:
         update_ytdlp(url)
 
