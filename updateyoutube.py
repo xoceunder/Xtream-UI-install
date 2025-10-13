@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # update panel
 import subprocess, os, sys
@@ -11,4 +11,3 @@ def updateyoutube():
 
 if __name__ == "__main__":
     updateyoutube()
-    #start()
