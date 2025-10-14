@@ -167,8 +167,9 @@ def install():
 def encrypt(rHost="127.0.0.1", rUsername="user_iptvpro", rPassword="", rDatabase="xtream_iptvpro", rServerID=1, rPort=7999):
     try: os.remove("/home/xtreamcodes/iptv_xtream_codes/config")
     except: pass
-    rf = open('/home/xtreamcodes/iptv_xtream_codes/config', 'wb')
-    rf.write(''.join(chr(ord(c)^ord(k)) for c,k in izip('{\"host\":\"%s\",\"db_user\":\"%s\",\"db_pass\":\"%s\",\"db_name\":\"%s\",\"server_id\":\"%d\", \"db_port\":\"%d\"}' % (rHost, rUsername, rPassword, rDatabase, rServerID, rPort), cycle('5709650b0d7806074842c6de575025b1'))).encode('base64').replace('\n', ''))
+    rf = open("/home/xtreamcodes/iptv_xtream_codes/config", 'wb')
+    lestring=''.join(chr(ord(c)^ord(k)) for c,k in zip('{\"host\":\"%s\",\"db_user\":\"%s\",\"db_pass\":\"%s\",\"db_name\":\"%s\",\"server_id\":\"%d\", \"db_port\":\"%d\"}' % (rHost, rUsername, rPassword, rDatabase, rServerID, rPort), cycle('5709650b0d7806074842c6de575025b1')))
+    rf.write(base64.b64encode(bytes(lestring, 'ascii')))
     rf.close()
 
 def start(): 
