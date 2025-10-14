@@ -136,30 +136,30 @@ def install():
         os.system('rm /usr/bin/ffmpeg')
         os.system('rm /usr/bin/ffprobe')
         os.system("chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
-        os.system("sudo umount -l /home/xtreamcodes/iptv_xtream_codes/streams")
-        os.system("sudo umount -l /home/xtreamcodes/iptv_xtream_codes/tmp")
+        os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/streams")
+        os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/tmp")
         os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" >/dev/null 2>&')
         os.system('wget -q -O "/home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb" "%s"' % get_GeoLite2())
-        os.system("sudo mount -a")
+        os.system("mount -a")
         os.system('mv "%s.xc" "%s" && mv "%s.xc" "%s"' % (rNginx, rNginx, rNginxRtmp, rNginxRtmp))
         os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
         os.system("rm /usr/local/bin/youtube-dl >/dev/null 2>&1")
         os.system('wget -q -O "/usr/local/bin/youtube-dl" "%s"' % get_youtube())
-        os.system("sudo chmod a+rx /usr/local/bin/youtube-dl")
+        os.system("chmod a+rx /usr/local/bin/youtube-dl")
     if not "www.google.com" in open("/home/xtreamcodes/iptv_xtream_codes/wwwdir/index.php").read(): os.system("sed -i 's|echo \"Xtream Codes Reborn\";|header(\"Location: https://www.google.com/\");|g' /home/xtreamcodes/iptv_xtream_codes/wwwdir/index.php >/dev/null 2>&1")
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/tv_archive"): os.mkdir("/home/xtreamcodes/iptv_xtream_codes/tv_archive/")
     os.system("mount -a")
     os.system("chown -R xtreamcodes:xtreamcodes /home/xtreamcodes")
     os.system("chmod -R 0777 /home/xtreamcodes")
     os.system("chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
-    try: os.remove("/tmp/xtreamcodes.zip")
-    except: pass
+    #try: os.remove("/tmp/xtreamcodes.zip")
+    #except: pass
     if not "Provides" in open("/etc/init.d/xtreamcodes").read():
         os.system("rm /etc/init.d/xtreamcodes")
         rStart = open("/etc/init.d/xtreamcodes", "w")
         rStart.write(initd_script)
         rStart.close()
-        os.system("sudo chmod +x /etc/init.d/xtreamcodes")
+        os.system("chmod +x /etc/init.d/xtreamcodes")
         os.system("update-rc.d xtreamcodes defaults")
         return True
     return False
@@ -175,7 +175,7 @@ def encrypt(rHost="127.0.0.1", rUsername="user_iptvpro", rPassword="", rDatabase
 def start(): 
     os.system("chown xtreamcodes:xtreamcodes /home/xtreamcodes/iptv_xtream_codes/config")
     os.system("chmod 0700 /home/xtreamcodes/iptv_xtream_codes/config")
-    os.system("sudo systemctl restart xtreamcodes")
+    os.system("systemctl restart xtreamcodes")
 
 if __name__ == "__main__":
     rHost = sys.argv[1]
