@@ -150,8 +150,8 @@ def install():
     os.system("chown -R xtreamcodes:xtreamcodes /home/xtreamcodes")
     os.system("chmod -R 0777 /home/xtreamcodes")
     os.system("chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
-    #try: os.remove("/tmp/xtreamcodes.zip")
-    #except: pass
+    try: os.remove("/tmp/xtreamcodes.zip")
+    except: pass
     if not "Provides" in open("/etc/init.d/xtreamcodes").read():
         os.system("rm /etc/init.d/xtreamcodes")
         rStart = open("/etc/init.d/xtreamcodes", "w")
