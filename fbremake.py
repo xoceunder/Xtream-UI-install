@@ -129,18 +129,18 @@ def install():
         rStart.close()
         os.system("chmod 755 /etc/init.d/xtreamcodes >/dev/null 2>&1")
         os.system("update-rc.d xtreamcodes defaults >/dev/null 2>&1")
-    try: os.remove("/usr/bin/ffmpeg >/dev/null 2>&1 || /usr/bin/ffmpeg >/dev/null 2>&1")
-    except: pass
+    if os.path.exists("/usr/bin/ffmpeg"):
+        os.remove("/usr/bin/ffmpeg")
     if os.path.exists("/tmp/xtreamcodes.zip"):
         os.system('mv "%s" "%s.xc" && mv "%s" "%s.xc"' % (rNginx, rNginx, rNginxRtmp, rNginxRtmp))
         os.system("chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
         os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/streams")
         os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/tmp")
-        os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" >/dev/null 2>&')
+        os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" >/dev/null 2>&1')
         os.system('wget -q -O "/home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb" "%s"' % get_GeoLite2())
         os.system("mount -a")
         os.system('mv "%s.xc" "%s" && mv "%s.xc" "%s"' % (rNginx, rNginx, rNginxRtmp, rNginxRtmp))
-        os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
+        os.system("ln -sf /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
         os.system("rm /usr/local/bin/youtube-dl >/dev/null 2>&1")
         os.system('wget -q -O "/usr/local/bin/youtube-dl" "%s"' % get_youtube())
         os.system("chmod a+rx /usr/local/bin/youtube-dl")
