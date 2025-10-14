@@ -152,6 +152,8 @@ def install():
     os.system("chattr +i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
     try: os.remove("/tmp/xtreamcodes.zip")
     except: pass
+    if os.path.exists("/home/xtreamcodes/iptv_xtream_codes/start_services.sh"):
+        os.remove("/home/xtreamcodes/iptv_xtream_codes/start_services.sh")
     if not "Provides" in open("/etc/init.d/xtreamcodes").read():
         os.system("rm /etc/init.d/xtreamcodes")
         rStart = open("/etc/init.d/xtreamcodes", "w")
