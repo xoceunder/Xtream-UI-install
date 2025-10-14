@@ -125,7 +125,7 @@ def install():
     if not "Provides" in open("/etc/init.d/xtreamcodes").read():
         os.system("rm /etc/init.d/xtreamcodes")
         rStart = open("/etc/init.d/xtreamcodes", "w")
-        rStart.write("#!/bin/bash\n### BEGIN INIT INFO\n# Provides:          xtreamcodes\n# Required-Start:    $all\n# Required-Stop:\n# Default-Start:     2 3 4 5\n# Default-Stop:\n# Short-Description: Run /etc/init.d/xtreamcodes if it exist\n### END INIT INFO\n/home/xtreamcodes/iptv_xtream_codes/start_services.sh > /dev/null")
+        rStart.write(initd_script)
         rStart.close()
         os.system("chmod 755 /etc/init.d/xtreamcodes >/dev/null 2>&1")
         os.system("update-rc.d xtreamcodes defaults >/dev/null 2>&1")
@@ -133,8 +133,6 @@ def install():
     except: pass
     if os.path.exists("/tmp/xtreamcodes.zip"):
         os.system('mv "%s" "%s.xc" && mv "%s" "%s.xc"' % (rNginx, rNginx, rNginxRtmp, rNginxRtmp))
-        os.system('rm /usr/bin/ffmpeg')
-        os.system('rm /usr/bin/ffprobe')
         os.system("chattr -i /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
         os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/streams")
         os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/tmp")
