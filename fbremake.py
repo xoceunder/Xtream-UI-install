@@ -137,6 +137,9 @@ def install():
         os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/streams")
         os.system("umount -l /home/xtreamcodes/iptv_xtream_codes/tmp")
         os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" >/dev/null 2>&1')
+        if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/xtreamcodes"): 
+            os.system("wget -q https://github.com/xoceunder/Xtream-UI-install/raw/main/xtreamcodes -O /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
+            os.system("sudo chmod +x /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
         os.system('wget -q -O "/home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb" "%s"' % get_GeoLite2())
         os.system("mount -a")
         os.system('mv "%s.xc" "%s" && mv "%s.xc" "%s"' % (rNginx, rNginx, rNginxRtmp, rNginxRtmp))
