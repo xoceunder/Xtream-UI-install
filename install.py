@@ -321,8 +321,11 @@ def configure():
         os.system('sudo echo "\nDefaultLimitNOFILE=655350" >> "/etc/systemd/user.conf"')
     try: os.remove("/usr/bin/ffmpeg")
     except: pass
+    try: os.remove("/usr/bin/ffprobe")
+    except: pass
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/tv_archive"): os.mkdir("/home/xtreamcodes/iptv_xtream_codes/tv_archive/")
     os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
+    os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffprobe /usr/bin/")
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb"): os.system("wget -q https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/GeoLite2.mmdb -O /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb")
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php"): os.system("wget -q https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/pid_monitor.php -O /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php")
     os.system("chown xtreamcodes:xtreamcodes -R /home/xtreamcodes >/dev/null 2>&1")
