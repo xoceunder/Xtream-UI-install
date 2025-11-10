@@ -11,7 +11,7 @@ This is an installation mirror for xtream ui software on Ubuntu.
 ## ⚙️ Installation
 Update your ubuntu first, then install panel:
 ``` 
-rm -rf install.py && wget https://github.com/xoceunder/Xtream-UI-install/raw/main/install.py && sudo python3 install.py 
+sudo apt update && sudo apt full-upgrade -y && rm -rf install.py && wget https://github.com/xoceunder/Xtream-UI-install/raw/main/install.py && sudo python3 install.py 
 ```
 ## 📡 Streaming URLs
 | Platform | URL Format |
