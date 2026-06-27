@@ -177,12 +177,12 @@ def install(rType="MAIN"):
     except:
         printc("Invalid download URL!", col.BRIGHT_RED)
         return False
-    os.system('curl -L -A "Mozilla/5.0" -o "/tmp/xtreamcodes.zip" "%s"' % rURL)
+    os.system('curl -L -A "Mozilla/5.0" -o "/tmp/xtreamcodes.zip" "%s" >/dev/null 2>&1' % rURL)
     if os.path.exists("/tmp/xtreamcodes.zip"):
         printc("Installing Software")
         os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" >/dev/null 2>&1')
         if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/xtreamcodes"): 
-            os.system('curl -L -s -A "Mozilla/5.0" "https://github.com/xoceunder/Xtream-UI-install/raw/main/xtreamcodes" -o /home/xtreamcodes/iptv_xtream_codes/xtreamcodes')
+            os.system('curl -L -s -A "Mozilla/5.0" "https://github.com/xoceunder/Xtream-UI-install/raw/main/xtreamcodes" -o /home/xtreamcodes/iptv_xtream_codes/xtreamcodes >/dev/null 2>&1')
             os.system("sudo chmod +x /home/xtreamcodes/iptv_xtream_codes/xtreamcodes")
         try: os.remove("/tmp/xtreamcodes.zip")
         except: pass
@@ -197,7 +197,7 @@ def update(rType="MAIN"):
     else:
         rlink = "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/release_22f.zip"
         printc("Downloading Software Update")  
-    os.system('curl -L -s -A "Mozilla/5.0" -o "/tmp/update.zip" "%s"' % rlink)
+    os.system('curl -L -s -A "Mozilla/5.0" -o "/tmp/update.zip" "%s" >/dev/null 2>&1' % rlink)
     if os.path.exists("/tmp/update.zip"):
         try: is_ok = zipfile.ZipFile("/tmp/update.zip")
         except:
@@ -332,8 +332,8 @@ def configure():
     if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/tv_archive"): os.mkdir("/home/xtreamcodes/iptv_xtream_codes/tv_archive/")
     os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffmpeg /usr/bin/")
     os.system("ln -s /home/xtreamcodes/iptv_xtream_codes/bin/ffprobe /usr/bin/")
-    if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb"): os.system('curl -L -s -A "Mozilla/5.0" "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/GeoLite2.mmdb" -o /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb')
-    if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php"): os.system('curl -L -s -A "Mozilla/5.0" "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/pid_monitor.php" -o /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php')
+    if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb"): os.system('curl -L -s -A "Mozilla/5.0" "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/GeoLite2.mmdb" -o /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb >/dev/null 2>&1')
+    if not os.path.exists("/home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php"): os.system('curl -L -s -A "Mozilla/5.0" "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/pid_monitor.php" -o /home/xtreamcodes/iptv_xtream_codes/crons/pid_monitor.php >/dev/null 2>&1')
     os.system("chown xtreamcodes:xtreamcodes -R /home/xtreamcodes >/dev/null 2>&1")
     os.system("chmod -R 0777 /home/xtreamcodes >/dev/null 2>&1")
     os.system("chattr -ai /home/xtreamcodes/iptv_xtream_codes/GeoLite2.mmdb >/dev/null 2>&1")
