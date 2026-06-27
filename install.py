@@ -171,7 +171,7 @@ def install(rType="MAIN"):
     except:
         printc("Invalid download URL!", col.BRIGHT_RED)
         return False
-    os.system('wget -q -O "/tmp/xtreamcodes.zip" "%s"' % rURL)
+    os.system('curl -L -A "Mozilla/5.0" -o "/tmp/xtreamcodes.zip" "%s"' % rURL)
     if os.path.exists("/tmp/xtreamcodes.zip"):
         printc("Installing Software")
         os.system('unzip -o "/tmp/xtreamcodes.zip" -d "/home/xtreamcodes/" >/dev/null 2>&1')
