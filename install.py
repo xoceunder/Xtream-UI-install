@@ -4,9 +4,8 @@ import subprocess, os, random, string, sys, shutil, socket, zipfile, json, base6
 from itertools import cycle
 from zipfile import ZipFile
 from urllib.request import urlopen
-
 rDownloadURL = {"main": "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/main_xui_xoceunder.zip", "sub": "https://bitbucket.org/xoceunder/xtream-ui-install/raw/main/sub_xui_xoceunder.zip"}
-rPackages = ["cpufrequtils", "iproute2", "python", "net-tools", "dirmngr", "gpg-agent", "software-properties-common", "libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fsprogs", "wget", "sysstat", "alsa-utils", "v4l-utils", "mcrypt", "nscd", "htop", "iptables-persistent", "libjpeg-dev", "libpng-dev", "php-ssh2", "xz-utils", "zip", "unzip", "mc", "libpng16-16", "libzip5", "rsync", "libmaxminddb0", "libmaxminddb-dev", "python3-paramiko", "python-is-python3", "mariadb-server"]
+rPackages = ["cpufrequtils", "iproute2", "python", "net-tools", "dirmngr", "gpg-agent", "software-properties-common", "libcurl4", "libxslt1-dev", "libgeoip-dev", "libonig-dev", "e2fsprogs", "wget", "sysstat", "alsa-utils", "v4l-utils", "mcrypt", "nscd", "htop", "iptables-persistent", "libjpeg-dev", "libpng-dev", "php-ssh2", "xz-utils", "curl", "zip", "unzip", "mc", "libpng16-16", "libzip5", "rsync", "libmaxminddb0", "libmaxminddb-dev", "python3-paramiko", "python-is-python3", "mariadb-server"]
 rRemove = ["mysql-server"]
 rInstall = {"MAIN": "main", "LB": "sub"}
 rUpdate = {"UPDATE": "update"}
